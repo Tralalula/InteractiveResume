@@ -87,6 +87,25 @@ education = {
   ]
 };
 
+work = {
+  "jobs": [
+    {
+      "employer": "AC/DC",
+      "title": "Destroyer of MACs",
+      "location": "Australia, Canberra",
+      "dates": "In progress",
+      "description": "My job is to destroy MACs whilst listening to AC/DC!"
+    },
+    {
+      "employer": "Penguin Hacking A/S",
+      "title": "Bacon Lord",
+      "location": "Greenland, Qasigiannguit",
+      "dates": "3939",
+      "description": "It's so cold..."
+    }
+  ]
+};
+
 bio.display = function () {
   var headerId = "#header";
   $(headerId).prepend(HTMLheaderRole.replace(data, bio.role));
@@ -149,5 +168,23 @@ education.display = function () {
   }
 };
 
+work.display = function () {
+  var workExperienceId = "#workExperience";
+  var workEntryClass = ".work-entry:last";
+  if (work.jobs.length > 0) {
+    $(workExperienceId).append(HTMLworkStart);
+    for (var job in work.jobs) {
+      $(workEntryClass).append(
+          HTMLworkEmployer.replace(data, work.jobs[job].employer) +
+          HTMLworkTitle.replace(data, work.jobs[job].title)
+      );
+      $(workEntryClass).append(HTMLworkDates.replace(data, work.jobs[job].dates));
+      $(workEntryClass).append(HTMLworkLocation.replace(data, work.jobs[job].location));
+      $(workEntryClass).append(HTMLworkDescription.replace(data, work.jobs[job].description));
+    }
+  }
+};
+
 bio.display();
 education.display();
+work.display();
