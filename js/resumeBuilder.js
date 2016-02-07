@@ -106,6 +106,28 @@ work = {
   ]
 };
 
+projects = {
+  "projects": [
+    {
+      "title": "Bacon",
+      "dates": "2014-2095",
+      "description": "How much bacon can a person eat a day?",
+      "images": ["https://upload.wikimedia.org/wikipedia/commons/3/31/Made20bacon.png"]
+    },
+    {
+      "title": "Cage",
+      "dates": "666-1337",
+      "description": "In search of Nicolas Cage",
+      "images": [
+        "https://www.placecage.com/400/400",
+        "https://www.placecage.com/g/400/400",
+        "https://www.placecage.com/c/400/400",
+        "https://www.placecage.com/gif/400/400"
+      ]
+    }
+  ]
+};
+
 bio.display = function () {
   var headerId = "#header";
   $(headerId).prepend(HTMLheaderRole.replace(data, bio.role));
@@ -141,6 +163,7 @@ bio.display = function () {
 education.display = function () {
   var educationId = "#education";
   var educationEntryClass = ".education-entry:last";
+
   if (education.schools.length > 0) {
     $(educationId).append(HTMLschoolStart);
     for (var school in education.schools) {
@@ -171,6 +194,7 @@ education.display = function () {
 work.display = function () {
   var workExperienceId = "#workExperience";
   var workEntryClass = ".work-entry:last";
+
   if (work.jobs.length > 0) {
     $(workExperienceId).append(HTMLworkStart);
     for (var job in work.jobs) {
@@ -185,6 +209,23 @@ work.display = function () {
   }
 };
 
+projects.display = function () {
+  var projectsId = "#projects";
+  var projectEntryClass = ".project-entry:last";
+  if (projects.projects.length > 0) {
+    for (var project in projects.projects) {
+      $(projectsId).append(HTMLprojectStart);
+      $(projectEntryClass).append(HTMLprojectTitle.replace(data, projects.projects[project].title));
+      $(projectEntryClass).append(HTMLprojectDates.replace(data, projects.projects[project].dates));
+      $(projectEntryClass).append(HTMLprojectDescription.replace(data, projects.projects[project].description));
+      for (var image in projects.projects[project].images) {
+        $(projectEntryClass).append(HTMLprojectImage.replace(data, projects.projects[project].images[image]));
+      }
+    }
+  }
+};
+
 bio.display();
 education.display();
 work.display();
+projects.display();
